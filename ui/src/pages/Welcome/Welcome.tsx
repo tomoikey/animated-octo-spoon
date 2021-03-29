@@ -11,16 +11,16 @@ const Welcome: React.FC = () => (
       <Row>
         <Container>
           <h3>Hi there!</h3>
-          <h1>Welcome to Bootzooka!</h1>
+          <h1>Welcome to TimeFree !</h1>
           <p>
             In this template application you can{" "}
             <Link to="/register" className="btn btn-outline-light">
-              Register
+              登録
             </Link>{" "}
             as a new user,
             <br />
             <Link to="/login" className="btn btn-outline-light">
-              Login
+              ログイン
             </Link>{" "}
             and later manage your user details.
           </p>

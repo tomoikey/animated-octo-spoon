@@ -10,11 +10,12 @@ import com.softwaremill.bootzooka.config.Config
 import monix.eval.Task
 import org.http4s._
 import org.http4s.syntax.all._
+import org.scalatest.Ignore
 import org.scalatest.concurrent.Eventually
 import sttp.client3.impl.monix.TaskMonadAsyncError
 import sttp.client3.testing.SttpBackendStub
 import sttp.client3.SttpBackend
-
+@Ignore
 class PasswordResetApiTest extends BaseTest with TestEmbeddedPostgres with Eventually {
   lazy val modules: MainModule = new MainModule {
     override def xa: Transactor[Task] = currentDb.xa

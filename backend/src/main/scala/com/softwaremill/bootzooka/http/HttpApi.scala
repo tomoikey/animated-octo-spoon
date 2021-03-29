@@ -80,7 +80,7 @@ class HttpApi(
   private def indexResponse(r: Request[Task]): Task[Response[Task]] =
     StaticFile.fromResource(s"/webapp/index.html", staticFileBlocker, Some(r)).getOrElseF(Task.pure(Response.notFound[Task]))
 
-  private val respondWithNotFound: HttpRoutes[Task] = Kleisli(_ => OptionT.pure(Response.notFound))
+  private val respondWithNotFound: HttpRoutes[Task] = Kleisli(_ => OptionT.pure(Response.notFound)) //
   private val respondWithIndex: HttpRoutes[Task] = Kleisli(req => OptionT.liftF(indexResponse(req)))
 
   private def loggingMiddleware(service: HttpRoutes[Task]): HttpRoutes[Task] = Kleisli { req: Request[Task] =>
@@ -92,7 +92,7 @@ class HttpApi(
 
   /** Serves the webapp resources (html, js, css files), from the /webapp directory on the classpath.
     */
-  private lazy val webappRoutes: HttpRoutes[Task] = {
+  private lazy val webappRoutes: HttpRoutes[Task] = { //fumei
     val dsl = Http4sDsl[Task]
     import dsl._
     val rootRoute = HttpRoutes.of[Task] { case request @ GET -> Root =>

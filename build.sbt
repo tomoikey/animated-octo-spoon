@@ -18,6 +18,8 @@ val sttpVersion = "3.2.0"
 val prometheusVersion = "0.10.0"
 val tapirVersion = "0.17.19"
 
+
+
 val dbDependencies = Seq(
   "org.tpolecat" %% "doobie-core" % doobieVersion,
   "org.tpolecat" %% "doobie-hikari" % doobieVersion,
@@ -83,6 +85,19 @@ val emailDependencies = Seq(
   "com.sun.mail" % "javax.mail" % "1.6.2" exclude("javax.activation", "activation")
 )
 
+val enumeratumVersion = "1.6.1"
+val lbDependencies = Seq(
+  "com.markatta" %% "timeforscala" % "1.9",
+  "com.beachape" %% "enumeratum-doobie" % "1.6.0",
+  "com.beachape" %% "enumeratum-play" % "1.6.1",
+  "com.beachape" %% "enumeratum" % enumeratumVersion,
+  "org.scalameta" %% "munit" % "0.7.22" % Test,
+  "org.scalameta" %% "munit-scalacheck" % "0.7.22" % Test,
+  "com.beachape" %% "enumeratum-scalacheck" % "1.6.1" % Test,
+  "org.typelevel" %% "munit-cats-effect-2" % "0.13.1" % Test,
+)
+testFrameworks += new TestFramework("munit.Framework")
+
 val scalatest = "org.scalatest" %% "scalatest" % "3.2.6" % Test
 val unitTestingStack = Seq(scalatest)
 
@@ -93,7 +108,7 @@ val catsEffectStack = Seq(
   "org.typelevel" %% "cats-effect-laws" % "2.3.3" % Test
 )
 
-val commonDependencies = baseDependencies ++ unitTestingStack ++ loggingDependencies ++ configDependencies
+val commonDependencies = baseDependencies ++ unitTestingStack ++ loggingDependencies ++ configDependencies ++ lbDependencies
 
 lazy val uiProjectName = "ui"
 lazy val uiDirectory = settingKey[File]("Path to the ui project directory")
@@ -205,6 +220,7 @@ lazy val rootProject = (project in file("."))
 lazy val backend: Project = (project in file("backend"))
   .settings(
     libraryDependencies ++= dbDependencies ++ httpDependencies ++ jsonDependencies ++ apiDocsDependencies ++ monitoringDependencies ++ dbTestingStack ++ securityDependencies ++ emailDependencies ++ catsEffectStack,
+    testFrameworks += new TestFramework("munit.Framework"),
     mainClass in Compile := Some("com.softwaremill.bootzooka.Main")
   )
   .enablePlugins(BuildInfoPlugin)

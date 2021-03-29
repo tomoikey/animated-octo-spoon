@@ -10,13 +10,14 @@ import com.softwaremill.bootzooka.user.UserApi._
 import com.softwaremill.bootzooka.util.Clock
 import monix.eval.Task
 import org.http4s.Status
+import org.scalatest.Ignore
 import org.scalatest.concurrent.Eventually
 import sttp.client3.SttpBackend
 import sttp.client3.impl.monix.TaskMonadAsyncError
 import sttp.client3.testing.SttpBackendStub
 
 import scala.concurrent.duration._
-
+@Ignore
 class UserApiTest extends BaseTest with TestEmbeddedPostgres with Eventually {
 
   lazy val modules: MainModule = new MainModule {

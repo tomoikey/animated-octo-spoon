@@ -1,9 +1,8 @@
 package com.softwaremill.bootzooka.user
 
 import java.time.Instant
-
 import cats.data.NonEmptyList
-import com.softwaremill.bootzooka.http.Http
+import com.softwaremill.bootzooka.http.{Error_OUT, Http}
 import com.softwaremill.bootzooka.infrastructure.Json._
 import com.softwaremill.bootzooka.infrastructure.Doobie._
 import com.softwaremill.bootzooka.metrics.Metrics
@@ -11,7 +10,9 @@ import com.softwaremill.bootzooka.security.{ApiKey, Auth}
 import com.softwaremill.bootzooka.util.ServerEndpoints
 import doobie.util.transactor.Transactor
 import monix.eval.Task
+import sttp.model.StatusCode
 import sttp.tapir.generic.auto._
+import sttp.tapir.server.ServerEndpoint
 
 import scala.concurrent.duration._
 
